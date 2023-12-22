@@ -23,8 +23,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  origin: process.env.CLIENT_URL,
+  origin: 'http://localhost:5173', // Ensure no trailing slash
 }));
+
+// Handle pre-flight OPTIONS request
+app.options('*', cors());
 
 async function getUserDataFromRequest(req) {
   return new Promise((resolve, reject) => {
